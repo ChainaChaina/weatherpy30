@@ -72,12 +72,15 @@ if "daily" in dados:
         output.seek(0)
         return output
 
-    st.download_button(
-        label="📥 Baixar dados em Excel",
-        data=to_excel(df),
-        file_name="clima_30_dias.xlsx",
-        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
+    try:
+        st.download_button(
+            label="📥 Baixar dados em Excel",
+            data=to_excel(df),
+            file_name="clima_30_dias.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+    except Exception as e:
+        st.error(f"Erro ao gerar o arquivo Excel: {e}")
 
 else:
     st.error("Não foi possível obter os dados climáticos 😒")
